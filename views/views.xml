@@ -1,73 +1,80 @@
 <odoo>
-  <data>
     <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="view_tree_detentions">
+          <field name="name">view.tree.detentions</field>
+          <field name="model">detentions.detention</field>
+           <field name="arch" type="xml">
+               <tree>
+                   <field name="invoice"/>
+                   <field name="arrested_name"/>
+                   <field name="personal_phone"/>
+                   <field name="arrested_address"/>
+                   <field name="tiene_lesiones"/>
+                   <field name="responsable_id"/>
+                   <field name="responsable_nombre"/>
+               </tree>
+           </field>
+    </record>
 
-    <record model="ir.ui.view" id="detentions_view_form">
-      <field name="name">detentions.list</field>
-      <field name="model">detentions.detentions</field>
-      <field name="arch" type="xml">
-
-        <form>
-          <field name="invoice" string="No. De Folio"  style= "width:20%;"/>
-          <field name="arrested_name" string ="Nombre del Detenido" style= "width:80%;"/>
-          <field name="personal_phone" string ="Teléfono Personal" style= "width:40%;"/>
-          <field name="tiene_lesiones" string ="¿Tiene Lesiones?" style= "width:40%;"/>
-          <field name="responsable_id" string ="Número de Empleado Responsable" style= "width:40%;"/>
-          <field name="corporation_nombre" string ="Nombre del Responsable" style= "width:40%;"/>
-          <field name="corporation_responsable" string ="Corporación del responsable" style= "width:40%;"/>
-          <field name="status" string ="Estatus" style= "width:40%;"/>
-          <field name="entry_type" string ="Ingreso por" style= "width:40%;"/>
-          <field name="turno" string ="Turno" style= "width:40%;"/>
-          <field name="capturista_id" string ="Numero Empleado de Capturista" style= "width:40%;"/>
-          <field name="capturista_nombre" string ="Capturista" style= "width:80%;"/>
-          <field name="coments" string ="Comentarios"/>
-          <field name="movements" string ="Nombre de Movimientos" style= "width:40%;"/>
-          <field name="movements_ids" string ="movements" style= "width:40%;"/>
-        </form>
-
+    <record id="form_view_detentions" model="ir.ui.view">
+        <field name ="name">form.view.detentions</field>
+        <field name ="model">detentions.detention</field>
+        <field name ="arch" type ="xml">
+            <form>
+                <sheet>
+                            <group>
+                            <field name="invoice" string="Folio" style="background:Orange;"/>
+                            </group>
+                    <notebook>
+                        <page string="Datos detenido">
+                            <group>
+                            <field name="arrested_name" string="Nombre del Detenido"/>
+                            </group>
+                            <group col="4">
+                            <field name="personal_phone" string="Teléfono Personal"/>
+                            <field name='arrested_address' string="Dirección del Detenido"/>
+                            <field name="tiene_lesiones" string="¿Tiene Lesiones?"/>
+                            <field name='entry_type' string="Ingreso por"/>
+                            <field name="status" string ="Estatus"/>
+                            </group>
+                        </page>
+                        <page string="Datos secundarios">
+                              <group>
+                                  <group>
+                                      <field name="responsable_id" string ="Número de Empleado Responsable"/>
+                                      <field name="turno" string ="Turno"/>
+                                      <field name="corporation_responsable" string ="Corporación del responsable"/>
+                                  </group>
+                                  <group>
+                                      <field name="capturista_id" string ="Numero Empleado de Capturista"/>
+                                      <field name="coments" string ="Comentarios"/>
+                                      <field name="capturista_nombre" string ="Capturista"/>
+                                  </group>
+                              </group>
+                        </page>
+                        <page string="Historial de movimientos">
+                            <group>
+                                <field name="movements_ids" string ="Movimientos"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
     </record>
 
 
     <!-- actions opening views on models -->
 
-    <!--<record model="ir.actions.act_window" id="detentions.action_window">
-      <field name="name">detentions window</field>
-      <field name="res_model">detentions.detentions</field>
+    <record model="ir.actions.act_window" id="action_view_detentions">
+      <field name="name">Detenciones</field>
+      <field name="res_model">detentions.detention</field>
       <field name="view_mode">tree,form</field>
-    </record>-->
-
-
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="detentions.action_server">
-      <field name="name">detentions server</field>
-      <field name="model_id" ref="model_detentions_detentions"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
     </record>
--->
 
     <!-- Top menu item -->
+    <menuitem id="menu_detenciones_root" parent="" action ="detentions.action_view_detentions"/>
 
-    <menuitem name="detentions" id="detentions.menu_root"/>
-
-    <!-- menu categories -->
-
-    <menuitem name="Menu 1" id="detentions.menu_1" parent="detentions.menu_root"/>
-    <menuitem name="Menu 2" id="detentions.menu_2" parent="detentions.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="detentions.menu_1_list" parent="detentions.menu_1"
-              action="detentions.action_window"/>
-    <menuitem name="Server to list" id="detentions" parent="detentions.menu_2"
-              action="detentions.action_server"/>
--->
-  </data>
 </odoo>
+
+

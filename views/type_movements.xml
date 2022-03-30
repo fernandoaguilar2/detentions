@@ -1,0 +1,13 @@
+<odoo>
+     <record model="ir.ui.view" id="view_tree_type_movements">
+      <field name="name">view.tree.type_movements</field>
+      <field name="model">detentions.type.movements</field>
+       <field name="arch" type="xml">
+               <tree>
+                  <field name="nombre_tipo_movimiento"/>
+                  <field name="descripcion_tipo_movimiento"/>
+              </tree>
+       </field>
+     </record>
+
+</odoo>

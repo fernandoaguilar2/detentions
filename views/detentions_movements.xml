@@ -1,0 +1,17 @@
+<odoo>
+    <!-- explicit list view definition -->
+     <record model="ir.ui.view" id="view_tree_detentions_movements">
+      <field name="name">view.tree.movements</field>
+      <field name="model">detentions.movements</field>
+       <field name="arch" type="xml">
+              <tree>
+                  <field name="fecha_hora"/>
+                  <field name="documento_id"/>
+                  <field name="no_oficio"/>
+                  <field name="ordenante"/>
+                  <field name="entregante_nombre"/>
+                  <field name="receptor_nombre"/>
+              </tree>
+       </field>
+     </record>
+</odoo>
