@@ -1,60 +1,52 @@
 <odoo>
     <!-- explicit list view definition -->
     <record model="ir.ui.view" id="view_tree_detentions">
-          <field name="name">view.tree.detentions</field>
-          <field name="model">detentions.detention</field>
-           <field name="arch" type="xml">
-               <tree>
-                   <field name="invoice"/>
-                   <field name="arrested_name"/>
-                   <field name="personal_phone"/>
-                   <field name="arrested_address"/>
-                   <field name="tiene_lesiones"/>
-                   <field name="responsable_id"/>
-                   <field name="responsable_nombre"/>
-               </tree>
-           </field>
+        <field name="name">view.tree.detentions</field>
+        <field name="model">detentions.detention</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="invoice"/>
+                <field name="arrested_name"/>
+                <field name="entry_type"/>
+                <field name="personal_phone"/>
+                <field name="arrested_address"/>
+                <field name="tiene_lesiones"/>
+                <field name="responsable_id"/>
+                <field name="responsable_nombre"/>
+            </tree>
+        </field>
     </record>
-
     <record id="form_view_detentions" model="ir.ui.view">
-        <field name ="name">form.view.detentions</field>
-        <field name ="model">detentions.detention</field>
-        <field name ="arch" type ="xml">
+        <field name="name">form.view.detentions</field>
+        <field name="model">detentions.detention</field>
+        <field name="arch" type="xml">
             <form>
+                <img src='detentions/static/image/nnl.jpg' style="max-height: 100%; max-width: 100%;"/>
                 <sheet>
-                            <group>
-                            <field name="invoice" string="Folio" style="background:Orange;"/>
-                            </group>
+                    <group>
+                        <field name="invoice" string="Folio" style="background:orange;"/>
+                        <field name="arrested_name" string="Nombre del Detenido"/>
+                        <field name='arrested_address' string="Dirección del Detenido"/>
+                        <field name="personal_phone" string="Teléfono Personal"/>
+                    </group>
                     <notebook>
-                        <page string="Datos detenido">
-                            <group>
-                            <field name="arrested_name" string="Nombre del Detenido"/>
-                            </group>
+                        <page string="Datos del ingreso del detenido">
                             <group col="4">
-                            <field name="personal_phone" string="Teléfono Personal"/>
-                            <field name='arrested_address' string="Dirección del Detenido"/>
-                            <field name="tiene_lesiones" string="¿Tiene Lesiones?"/>
-                            <field name='entry_type' string="Ingreso por"/>
-                            <field name="status" string ="Estatus"/>
+                                <field name='entry_type' string="Ingreso por" required="1"/>
+                                <field name="tiene_lesiones" string="¿Tiene Lesiones?" required="1"/>
+                                <field name="status" string="Estatus"  required="1"/>
+                                <separator string="INFORMACIÓN DE CAPTURA" colspan="5"/>
+                                <field name="responsable_id" string="Número de Empleado Responsable"/>
+                                <field name="capturista_id" string="Numero Empleado de Capturista"/>
+                                <field name="corporation_responsable" string="Corporación del responsable"/>
+                                <field name="capturista_nombre" string="Capturista"/>
+                                <field name="turno" string="Turno"/>
+                                <field name="coments" string="Comentarios"/>
                             </group>
-                        </page>
-                        <page string="Datos secundarios">
-                              <group>
-                                  <group>
-                                      <field name="responsable_id" string ="Número de Empleado Responsable"/>
-                                      <field name="turno" string ="Turno"/>
-                                      <field name="corporation_responsable" string ="Corporación del responsable"/>
-                                  </group>
-                                  <group>
-                                      <field name="capturista_id" string ="Numero Empleado de Capturista"/>
-                                      <field name="coments" string ="Comentarios"/>
-                                      <field name="capturista_nombre" string ="Capturista"/>
-                                  </group>
-                              </group>
                         </page>
                         <page string="Historial de movimientos">
                             <group>
-                                <field name="movements_ids" string ="Movimientos"/>
+                                <field name="movements_ids" string="Movimientos" context="{'default_detention_id':active_id}"/>
                             </group>
                         </page>
                     </notebook>
@@ -62,19 +54,42 @@
             </form>
         </field>
     </record>
-
-
-    <!-- actions opening views on models -->
-
-    <record model="ir.actions.act_window" id="action_view_detentions">
-      <field name="name">Detenciones</field>
-      <field name="res_model">detentions.detention</field>
-      <field name="view_mode">tree,form</field>
+    <record model="ir.ui.view" id="view_search_detentions">
+        <field name="name">view.search.detentions</field>
+        <field name="model">detentions.detention</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="invoice"/>
+                <field name="arrested_name" domain_filter="[('name','ilike',self)"/>
+                <filter name ="filter_entry_type" string="filtrar por delito" domain="[('entry_type','=','delito')]"/>
+                <filter name ="filter_entry_type" string="filtrar por falta administrativa" domain="[('entry_type','=','falta_administrativa')]"/>
+                <filter name="group_entry_type" string="Agrupar por tipo de ingreso" context="{'group_by':'entry_type'}"/>
+                <filter name="group_status" string="Agrupar por Estatus" context="{'group_by':'status'}"/>
+            </search>
+        </field>
     </record>
-
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="action_view_detentions">
+        <field name="name">Detenciones</field>
+        <field name="res_model">detentions.detention</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="action_view_detentions_type_movements">
+        <field name="name">Tipos de Movimientos</field>
+        <field name="res_model">detentions.type.movements</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="action_view_detentions_movements">
+        <field name="name">Tipos de Detenciones</field>
+        <field name="res_model">detentions.movements</field>
+        <field name="view_mode">tree,form</field>
+    </record>
     <!-- Top menu item -->
-    <menuitem id="menu_detenciones_root" parent="" action ="detentions.action_view_detentions"/>
-
+    <menuitem id="menu_detenciones_root" name="Detenciones" parent="" action="detentions.action_view_detentions"/>
+    <menuitem id="menu_detenciones" name="Registro de Detenciones" parent="menu_detenciones_root"
+              action="detentions.action_view_detentions"/>
+    <menuitem id="menu_tipo_detenciones" name="Tipos de Detenciones" parent="menu_detenciones_root"
+              action="detentions.action_view_detentions_movements"/>
+    <menuitem id="menu_movimientos_detenciones" name="Tipos de movimiento" parent="menu_detenciones_root"
+              action="detentions.action_view_detentions_type_movements"/>
 </odoo>
-
-

@@ -1,17 +1,56 @@
 <odoo>
     <!-- explicit list view definition -->
-     <record model="ir.ui.view" id="view_tree_detentions_movements">
-      <field name="name">view.tree.movements</field>
-      <field name="model">detentions.movements</field>
-       <field name="arch" type="xml">
-              <tree>
-                  <field name="fecha_hora"/>
-                  <field name="documento_id"/>
-                  <field name="no_oficio"/>
-                  <field name="ordenante"/>
-                  <field name="entregante_nombre"/>
-                  <field name="receptor_nombre"/>
-              </tree>
-       </field>
-     </record>
+    <record model="ir.ui.view" id="view_tree_detentions_movements">
+        <field name="name">view.tree.movements</field>
+        <field name="model">detentions.movements</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="detention_id"/>
+                <field name="tipo_movimineto_id"/>
+                <field name="fecha_hora"/>
+                <field name="documento_id"/>
+                <field name="no_oficio"/>
+                <field name="ordenante"/>
+                <field name="entregante_nombre"/>
+                <field name="receptor_nombre"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_form_detentions_movements">
+        <field name="name">form.view.detentions_movements</field>
+        <field name="model">detentions.movements</field>
+        <field name="arch" type="xml">
+            <form>
+                <img src='detentions/static/image/nnld.jpg' style="max-height: 100%; max-width: 100%;"/>
+                <group>
+                    <field name='detention_id' string="Detenido"/>
+                    <field name='fecha_hora' string="Fecha de Movimiento"/>
+                    <field name='no_oficio' string="Numero de Oficio"/>
+                    <field name='ordenante' string="Ordenante"/>
+                </group>
+                <group>
+                    <field name='es_empleado_entregante' string="El entregante es empleado de SSP?"/>
+                    <field name="entregante_id" attrs="{'invisible':[('es_empleado_entregante','!=',True)]}"/>
+                    <field name="entregante_nombre" attrs="{'invisible':[('es_empleado_entregante','=',False)]}"/>
+                    <field name='entregante_dependencia' string="Dependencia del entregante" attrs="{'invisible':[('es_empleado_entregante','!=',True)]}"/>
+                    <field name='entregante' string="Entregante" attrs="{'invisible':[('es_empleado_entregante','!=',False)],'required':[('es_empleado_entregante','!=',True)]}"/>
+                    <field name='es_empleado_receptor' string="El Receptor es empleado de SSP?"/>
+                    <field name="receptor_id" attrs="{'invisible':[('es_empleado_receptor','!=',True)]}"/>
+                    <field name="receptor_nombre" attrs="{'invisible':[('es_empleado_receptor','=',False)]}"/>
+                    <field name='receptor_dependencia' string="Dependencia del Receptor" attrs="{'invisible':[('es_empleado_receptor','!=',True)]}"/>
+                </group>
+                <group>
+                    <field name='receptor' string="Receptor" attrs="{'invisible':[('es_empleado_receptor','!=',False)],'required':[('es_empleado_receptor','!=',True)]}"/>
+                    <field name='unidad' string="Unidad"/>
+                </group>
+                <group>
+                    <field name='tipo_movimineto_id' string="tipo de movimiento"/>
+                    <field name='notas' string="Notas"/>
+                </group>
+                <group>
+                    <field name="documento_id" string="Numero del documento" widget="many2many_binary"/>
+                </group>
+            </form>
+        </field>
+    </record>
 </odoo>

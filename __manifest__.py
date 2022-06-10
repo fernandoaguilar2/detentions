@@ -8,7 +8,7 @@
     'description': """
         Long description of module's purpose""",
 
-    'author': "My Company",
+    'author': "Fernando Aguilar Pérez",
     'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
@@ -18,15 +18,17 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','hr'],
+    'depends': ['base','hr','web'],
 
 
     # always loaded
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
-        'views/views.xml'
-
-
+        'views/views.xml',
+        'views/detentions_movements.xml',
+        'views/type_movements.xml',
+        'data/detentions_data.xml',
+	    'templates/assets.xml'
     ]
 }
