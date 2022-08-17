@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_detentions_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-9">
+                                    <span class="large">Nombre de detenido</span> <!--check point2-->
+                                    <h3 class="font-weight-bold" t-field="o.arrested_name"></h3>
+                                </div>
+                                <div class="col-9">
+                                    <span class="small">Número de folio</span>
+                                    <h3 class="font-weight-bold" t-field="o.invoice"></h3>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div>
+                                        <h2 class="text-center pt-3">Datos Generales</h2>
+                                        <span class="small pl-2">Tiene Lesiones?</span>
+                                        <p class="badge-pill badge-light w-100 font-weight-bold">
+                                            <span t-field="o.tiene_lesiones"></span>
+                                        </p>
+                                        <span class="small pl-2">Domicilio del detenido</span>
+                                        <p class="badge-pill badge-light w-100 font-weight-bold"
+                                           t-field="o.arrested_address"></p>
+                                        <span class="small pl-2">Número de Teléfono Personal</span>
+                                        <p class="badge-pill badge-light w-100 font-weight-bold"
+                                           t-field="o.personal_phone"></p>
+                                        <span class="small pl-2">Entro por</span>
+                                        <p class="badge-pill badge-light w-100 font-weight-bold"
+                                           t-field="o.entry_type"></p>
+                                        <span class="small pl-2">Estatus</span>
+                                        <p class="badge-pill badge-light w-100 font-weight-bold" t-field="o.status"></p>
+                                        <span class="small pl-2">Turno</span>
+                                        <p class="badge-pill badge-light w-100 font-weight-bold" t-field="o.turno"></p>
+                                        <span class="small pl-2">Comentarios</span>
+                                        <p class="badge-pill badge-light w-100 font-weight-bold"
+                                           t-field="o.coments"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-3">
+                                    <span class="small">tipo de movimiento</span>
+                                </div>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Movimiento</th>
+                                            <th scope="col">Fecha de Movimiento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="o.movements_ids" t-as="movimiento">
+                                            <tr>
+                                                <td t-esc="movimiento.tipo_movimineto_id.nombre_tipo_movimiento"> </td>
+                                                <td t-esc="movimiento.fecha_hora"> </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <hr/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
