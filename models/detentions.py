@@ -59,10 +59,6 @@ class Detentions(models.Model):
     # FIELDS WORKING INFORMATION ADDED
 
 
-    # FEILDS ADDRESS ADDED
-
-
-    # FIELDS OF MEDIA AFILIAICIÓN
 
 
 

@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_detentions_detention,detentions.detention,model_detentions_detention,base.group_user,1,1,1,1
+access_movements_detention,detentions.detention,model_detentions_movements,base.group_user,1,1,1,1
+access_type_movements_detention,detentions.detention,model_detentions_type_movements,base.group_user,1,1,1,1

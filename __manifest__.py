@@ -28,7 +28,9 @@
         'views/views.xml',
         'views/detentions_movements.xml',
         'views/type_movements.xml',
-        'data/detentions_data.xml',
-	    'templates/assets.xml'
-    ]
+        'reports/report.xml',
+        'reports/template_detentions.xml',
+        'reports/template_movements.xml',
+        'data/detentions_data.xml'
+        ]
 }

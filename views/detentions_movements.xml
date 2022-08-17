@@ -44,13 +44,22 @@
                     <field name='unidad' string="Unidad"/>
                 </group>
                 <group>
-                    <field name='tipo_movimineto_id' string="tipo de movimiento"/>
+                    <field name='tipo_movimineto_id' string="Movimientos de detenidos"/>
                     <field name='notas' string="Notas"/>
                 </group>
                 <group>
                     <field name="documento_id" string="Numero del documento" widget="many2many_binary"/>
                 </group>
             </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_search_movements">
+        <field name="name">view.search.movements</field>
+        <field name="model">detentions.movements</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="detention_id" domain_filter="[('name','ilike',self)"/>
+            </search>
         </field>
     </record>
 </odoo>

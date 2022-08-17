@@ -54,6 +54,18 @@
             </form>
         </field>
     </record>
+
+     <record id="detention_tracker_view_graph" model="ir.ui.view">
+            <field name="name">detention.tracker.view.graph</field>
+            <field name="model">detentions.detention</field>
+            <field name="arch" type="xml">
+                <graph string="Links" type="bar">
+                    <field name="entry_type" type="row"/>
+                    <field name="entry_type" type="measure"/>
+                </graph>
+            </field>
+     </record>
+
     <record model="ir.ui.view" id="view_search_detentions">
         <field name="name">view.search.detentions</field>
         <field name="model">detentions.detention</field>
@@ -68,11 +80,13 @@
             </search>
         </field>
     </record>
+
+
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="action_view_detentions">
         <field name="name">Detenciones</field>
         <field name="res_model">detentions.detention</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,graph</field>
     </record>
     <record model="ir.actions.act_window" id="action_view_detentions_type_movements">
         <field name="name">Tipos de Movimientos</field>
@@ -88,8 +102,11 @@
     <menuitem id="menu_detenciones_root" name="Detenciones" parent="" action="detentions.action_view_detentions"/>
     <menuitem id="menu_detenciones" name="Registro de Detenciones" parent="menu_detenciones_root"
               action="detentions.action_view_detentions"/>
-    <menuitem id="menu_tipo_detenciones" name="Tipos de Detenciones" parent="menu_detenciones_root"
+    <menuitem id="menu_tipo_detenciones" name="Movimientos de Detenidos" parent="menu_detenciones_root"
               action="detentions.action_view_detentions_movements"/>
     <menuitem id="menu_movimientos_detenciones" name="Tipos de movimiento" parent="menu_detenciones_root"
               action="detentions.action_view_detentions_type_movements"/>
+    <!-- <menuitem id="menu_reportes" name="Reportes" parent="menu_detenciones_root"/> -->
+    <!-- <menuitem id="menu_reportes_detenidos" name="Reporte de Detenidos por Nombre" parent="menu_reportes" action="detentions.action_view_detentions"/> -->
+    <!--<menuitem id="menu_reportes_fecha" name="Reporte de Detenidos por Fecha" parent="menu_reportes" action="detentions.action_view_detentions"/>-->
 </odoo>
