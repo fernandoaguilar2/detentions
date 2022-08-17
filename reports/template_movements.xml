@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_detentions_movements_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="container"><!--16082022-->
+                            <div class="row">
+                               <div class="col-9"><span class="small">tipo de movimiento</span>
+                               <h3 class="font-weight-bold" t-field="o.tipo_movimineto_id"></h3></div>
+                                <t t-foreach= "movements" t-as= "movimiento" >
+                                    <span t-field= "movements.detentions_id"/>
+                                </t>
+                            </div>
+                            <hr/>
+                            <span class="font-weight-bold">Nombre del Detenido</span ><p class="badge-pill badge-light w-100 font-weight-bold" t-field="o.detention_id"></p>
+                            <hr/>
+                            <div class="row">
+                              <div class="col-3">
+                                <div >
+                                  <h4 class="text-left col-12"> Detalle Movimientos</h4>
+                                  <span class="small pl-2">Fecha de Movimiento</span><p class="badge-pill badge-light w-100 font-weight-bold" t-field="o.fecha_hora"></p>
+                                  <span class="small pl-2">Número de oficio</span><p class="badge-pill badge-light w-100 font-weight-bold"><span t-field="o.no_oficio"></span></p>
+                                    <hr/>
+                                  <span class="small pl-2">Ordenante</span><p class="badge-pill badge-light w-100 font-weight-bold" t-field="o.ordenante"></p>
+                                  <span class="small pl-2">Entregante ID</span><p class="badge-pill badge-light w-100 font-weight-bold" t-field="o.entregante_id"></p>
+                                  <span class="small pl-2">Nombre del entregante</span><p class="badge-pill badge-light w-100 font-weight-bold"><span t-field="o.entregante_nombre"></span></p>
+                                    <hr/>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

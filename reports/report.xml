@@ -1,0 +1,20 @@
+<odoo>
+    <report
+            id="report_detentions"
+            model="detentions.detention"
+            string="detention report"
+            name="detentions.report_detentions_pdf"
+            file="detentions.report_detentions_pdf"
+            report_type="qweb-pdf"/>
+
+    <report
+            id="report_detentions_movements"
+            model="detentions.movements"
+            string="Movement detention report"
+            name="detentions.report_detentions_movements_pdf"
+            file="detentions.report_detentions_movements_pdf"
+            report_type="qweb-pdf"/>
+
+</odoo>
+
+
